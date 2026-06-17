@@ -2,14 +2,20 @@ public class Website implements Subject{
     Website(String URL){
         this.URL=URL;
     }
+    Website(String URL,WebsiteComparisonStrategy strategy){
+        this.URL=URL;
+        this.strategy=strategy;
+    }
     private final String URL;
+    private WebsiteComparisonStrategy strategy;
     private String previousHtmlData;
     private  String retrieveCurrentHtml(){
         return "";
     }
     private void checkForUpdate() {//periodically called
+        if (strategy==null)return;//ensure we implemented a strategy
         String currentHTML = retrieveCurrentHtml();
-        if (!currentHTML.equals(previousHtmlData)) {
+        if (strategy.checkForChanges(previousHtmlData,currentHTML)) {
             previousHtmlData = currentHTML;
             doNotification();
         }

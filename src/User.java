@@ -4,7 +4,7 @@ public class User implements Observer{
         this.frequency=frequency;
         this.channel=channel;
     }
-    private String currentWebsiteState;
+    private String localWebsiteState;
     public Website getRegisteredWebsite(){
         return registeredWebsite;
     }
@@ -18,6 +18,6 @@ public class User implements Observer{
 
     @Override
     public void update(Notification notification) {
-        currentWebsiteState=notification.newHtml;
+        localWebsiteState=notification.newHtml;
     }
 }
